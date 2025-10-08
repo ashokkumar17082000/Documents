@@ -1,0 +1,117 @@
+To setup the Angular Dev Environment & rb-frontend-kit:
+
+Windows Machine:
+
+Step1: 
+Run the below commands on your terminal:
+
+npm install -g vsts-npm-auth --registry https://registry.npmjs.com  --always-auth false
+
+If You are facing any issue please setup the npm proxy on your machine using command prompt
+
+here the commands to solve:
+
+npm config set https-proxy "http://[NTID]:[password]@rb-proxy-de.bosch.com:8080/"  
+npm config set proxy "http://[NTID]:[password]@rb-proxy-de.bosch.com:8080/" 
+
+still facing the issue:
+please remove the exiting proxy with help of this commands and execute the above command:
+
+npm config rm proxy   
+npm config rm https-proxy
+
+Step2:
+
+Once the above commands executed successfully please follow this steps to setup the rb-frontend-kit
+
+Please add the below lines on your project root folder .npmrc file:
+
+'registry= https://pkgs.dev.azure.com/ELPC-IN-24/elpc-FrontEnd-v2/_packaging/rb.frontend.kit-npm/npm/registry/ 
+
+always-auth=true'
+
+Create the .npmrc file and keep the below commands on .npmrc file under c:users
+
+Step3:
+
+In this 'C:/Users/NTID/' directory please create the .npmrc file and save it.
+
+Please follow the next steps to create the Personal Access token and access token for accessing the rb-frontend-kit from your angular project.
+
+Please paste the below commands in .npmrc file of your 'C:/Users/NTID/.npmrc' directory
+
+; begin auth token
+//pkgs.dev.azure.com/ELPC-IN-24/_packaging/ELPC-IN-24/npm/registry/:username=ELPC-IN-24 
+//pkgs.dev.azure.com/ELPC-IN-24/_packaging/ELPC-IN-24/npm/registry/:_password=[BASE64_ENCODED_PERSONAL_ACCESS_TOKEN] 
+//pkgs.dev.azure.com/ELPC-IN-24/_packaging/ELPC-IN-24/npm/registry/:email=npm  requires email to be set but doesn't use the value
+//pkgs.dev.azure.com/ELPC-IN-24/_packaging/ELPC-IN-24/npm/:username=ELPC-IN-24 
+//pkgs.dev.azure.com/ELPC-IN-24/_packaging/ELPC-IN-24/npm/:_password=[BASE64_ENCODED_PERSONAL_ACCESS_TOKEN] 
+//pkgs.dev.azure.com/ELPC-IN-24/_packaging/ELPC-IN-24/npm/:email=npm  requires email to be set but doesn't use the value
+; end auth token
+
+after successfully completed the above step
+
+Next, open this link to create a personal access token: https://dev.azure.com/ELPC-IN-24/_usersSettings/tokens
+
+In this please click the New Token on top right corner, 
+In the Form: (Create a new personal access token)
+Name: Userfriendly and unique name
+Scopes: Full Access
+
+After successfully Created the Access token, please copy the token and save safly so that we need to use this token to generate the base64 format
+
+Base64 encode the personal access token from above.
+
+One safe and secure method of Base64 encoding a string is to:
+
+From a command/shell prompt run:
+node -e "require('readline') .createInterface({input:process.stdin,output:process.stdout,historySize:0}) .question('PAT> ',p => { b64=Buffer.from(p.trim()).toString('base64');console.log(b64);process.exit(); })"
+
+Paste your personal access token value and press Enter/Return
+
+Copy the Base64 encoded value
+
+Step 4
+Replace both [BASE64_ENCODED_PERSONAL_ACCESS_TOKEN] values in your user .npmrc file with your personal access token from Step 3.
+
+after successfully executed the above commands do the below steps
+
+Step 5:
+Please do 'npm cache clean --force' on your project root folder
+And, Remove the Node_Module and package-lock.json file 
+And, execute 'NPM Install'
+
+Still facing the issue:
+
+We need to delete and setup the proxy again :
+npm config delete proxy
+npm config delete https-proxy
+
+npm config set https-proxy "http://qoh2kor:Mohteg%40103105@rb-proxy-de.bosch.com:8080/ "
+npm config set proxy "http://qoh2kor:Mohteg%40103105@rb-proxy-de.bosch.com:8080/ "
+
+And
+
+Set the npm registry:
+
+npm config get registry
+
+npm config set registry "https://pkgs.dev.azure.com/ELPC-IN-24/_packaging/ELPC-IN-24/npm/registry/ "
+
+Once it's done please clear the npm cache and re install the npm
+
+And if your facing any issue any ng serve issue use the below:
+
+npm i ng-toggle-button@1.2.0
+
+From <https://www.npmjs.com/package/ng-toggle-button/v/1.2.0 >
+
+
+================================================================
+npm config set proxy http://USERID:PASSWORD@rb-proxy-in.bosch.com:8080
+npm config set https-proxy http://rb-proxy-in.bosch.com:8080
+
+
+
+git config --global http.proxy "http://qoh2kor:Elpcmoh%402025@rb-proxy-de.bosch.com:8080/"
+git config --global https.proxy "http://qoh2kor:Elpcmoh%402025@rb-proxy-de.bosch.com:8080/"
